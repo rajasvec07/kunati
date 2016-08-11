@@ -1,0 +1,12 @@
+﻿<div style="overflow:hidden;position:relative;height:100%;">
+    <ul style="background-color:#ddd;">
+        <li *ngFor="#message of messages; #i=index" class="msgcard {{isRead}}{{i}}" (click)="readMsg()">
+            <span class="img"><img src="{{message.image}}" /></span>
+            <div class="infoWrap">
+                <span class="num">{{message.from}}</span>
+                <span class="textPreview">{{message.text}}</span>
+            </div>
+        </li>
+    </ul>
+    <a id="back" href="javascript:;" (click)="readMsg()"><img src="images/arrow-81-24.ico" alt="" title="" /></a>
+</div>
