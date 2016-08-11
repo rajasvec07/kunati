@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 	<head>
 		<title>MY First Git Repository</title>
@@ -14,4 +14,120 @@
 		<h2>Gouthami</h2>
 		<h3>Kousar</h3>
 	</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular 2 Message App</title>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <!--<meta name="viewport" content="width=50%,height=100, intial-scale=1.0, user-scalable=yes" />-->
+    <script src="scripts/ie_shim/es6-shim.min.js"></script>
+    <script src="scripts/ie_shim/system-polyfills.js"></script>
+    <script src="scripts/ie_shim/shims_for_IE.js"></script>
+
+    <script src="scripts/angular2-polyfills.js"></script>
+    <script src="scripts/tools/system.js"></script>
+    <script src="scripts/tools/typescript.js"></script>
+    <script src="scripts/Rx.js"></script>
+    <script src="scripts/http.dev.js"></script>
+    <script src="scripts/router.dev.js"></script>
+    <script src="scripts/angular2.dev.js"></script>
+    <script src="scripts/jquery-1.11.1.min.js"></script>
+
+    <script>
+        System.config({
+            transpiler: "typescript",
+            typescriptOptions: {
+                emitDecoratormetadata: true
+            },
+            map: {
+                messages: "./app"
+            },
+            packages: {
+                messages: {
+                    main: "./main.ts",
+                    defaultExtension: "ts"
+                }
+            }
+        });
+
+        System.import("messages");
+
+    </script>
+    <style>
+        * {
+            padding:0;
+            margin:0;
+        }
+        img {
+            max-width:100%;
+            display:block;
+        }
+        ul, li {
+            list-style-type:none;
+        }
+        .main {
+            border:3px solid #9017FF;
+            width:250px;
+            height:305px;
+            margin:auto;
+        }
+            .main ul {
+                position:relative;
+                right:0;
+            }
+        .msgcard {
+            font-family:Arial,sans-serif;
+            display:block;
+            overflow:hidden;
+            border:1px solid transparent;
+            border-bottom-color:#9d9d9d;
+            border-width:0 0 1px 0;
+            /*padding:5px 2px;*/
+        }
+            .msgcard.false {
+                font-weight:bold;
+            }
+            .msgcard span {
+                float:left;
+            }
+        .infoWrap {
+            padding:3px;
+            float:left;
+            font-size:11px;
+        }
+        .img {
+                border: 1px solid #F96386;
+        }
+        .num {
+            
+        }
+        .textPreview {
+            width:160px;
+            clear:both;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            margin:2px 0;
+        }
+        .readtrue {
+            font-weight:bold;
+        }
+        .readfalse {
+            font-weight:normal;
+        }
+        #back {
+            display:none;
+            position:absolute;
+            bottom:0;
+            left:5px;
+        }
+    </style>
+</head>
+<base url="/" />
+<body>
+    <div class="main">
+        <messages></messages>
+    </div>
+</body>
 </html>
