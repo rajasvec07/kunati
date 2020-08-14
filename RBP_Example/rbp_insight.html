@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head1"><title>
+
+</title>
+    <style type="text/css">
+       
+        </style>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="DESCRIPTION" content="Fundamentally analyzed quantitatively selected indexes. Guggenheim RBP Indexes,RBP snapshots, RBP probabilities, RBP values." />
+    <meta name="KEYWORDS" content="Fundamentally analyzed quantitatively selected indexes.  Guggenheim RBP Indexes,RBP snapshots, RBP probabilities, RBP values." />
+<meta name="ROBOTS" content="NONE" />
+    <link rel="SHORTCUT ICON" href="https://www.rbpinsights.com/favicon.ico" />
+    <link href="https://www.rbpinsights.com/Stylesheets/screen.css?q=100" rel="stylesheet"
+        media="screen, projection" type="text/css" />
+    <link href="https://www.rbpinsights.com/Stylesheets/print.css" rel="stylesheet" media="print"
+        type="text/css" />
+    <link href="https://www.rbpinsights.com/Accordion/Accordion.css" rel="stylesheet" type="text/css" />
+
+    <script language="javascript" type="text/javascript">
+        var RootURL = "https://www.rbpinsights.com/"; 
+    </script>
+
+    <script language="javascript" src="https://www.rbpinsights.com/Javascripts/jquery-1.2.6.js"
+        type="text/javascript"></script>
+
+    <script type="text/javascript" src="https://www.rbpinsights.com/Javascripts/jFav_v1.0.js"></script>
+
+    <script language="javascript" src="https://www.rbpinsights.com/Javascripts/jsAjax.js"
+        type="text/javascript"></script>
+
+    <script type="text/javascript" language="JavaScript1.2" src="https://www.rbpinsights.com/Javascripts/jsPopWindow.js"></script>
+
+    
+
+    
+
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function () {
+            $("#dvSubscribe").show();
+        });
+
+        var isFirst = true;
+        var IndexId;
+        var lastClick = "";
+        var mode = "";
+        var lastMode = "";
+        var IndexName = "";
+        var TopTab = "";
+        function fnUrlChange(str) {
+            var pairs = str.split('_');
+            TopTab = pairs[0];
+            mode = pairs[3];
+            IndexName = pairs[1];
+            if (!isFirst) {
+                window.location.hash = str;
+            }
+            isFirst = false;
+            var pairs = str.split('_');
+            if (pairs[0] == "IndexChart") {
+                $(".dvChart").show();
+                $(".dvChart").css({ left: 45, position: 'absolute' });
+            }
+            else {
+                $(".dvChart").css({ left: -1500, position: 'absolute' });
+            }
+        }
+
+        function fnLoadChart(index) {
+            try {
+                $("#dvLoad").show();
+                var pairs = index.split('_');
+                IndexId = pairs[0];
+                Period = pairs[1].toUpperCase();
+                if (IndexName == "RBPWeighted") {
+                    mode = "RBP";
+                }
+                if (lastClick != index || lastMode != mode) {
+                    $("#ifChart").attr("src", "index-chart.aspx?qstrDJIndexId=" + IndexId + "&qstrPeriod=" + Period + "&qstrMode=" + mode);
+                    lastClick = index;
+                    lastMode = mode;
+                }
+                $(".btnChartOn").attr('class', 'btnChart');
+                $(".btnChartFirstOn").attr('class', 'btnChartFirst');
+                $(".btnChartLastOn").attr('class', 'btnChartLast');
+                $(".ChartTextOn").attr('class', 'ChartText');
+                $("#btnChart_" + Period).attr('class', 'btnChartOn');
+                $("#btnChart_" + Period).find('.ChartText').attr('class', 'ChartTextOn');
+                if (Period == "5D") {
+                    $("#btnChart_" + Period).attr('class', 'btnChartFirstOn');
+                }
+                if (Period == "MAX") {
+                    $("#btnChart_" + Period).attr('class', 'btnChartLastOn');
+                }
+                $.ajax({
+                    url: '../Common/AjaxFunctions.aspx?qstrtype=ChartLegend&qstrChartMode=' + mode + "&qstrDJIndexId=" + IndexId,
+                    success: function (result) {
+                        $("#dvLoad").hide();
+                        if ($.trim(result) != "") {
+                            $("#dvNote").html(result);
+                        }
+                    },
+                    error: function (xhr) {
+                        $("#dvLoad").hide();
+                    }
+                });
+            }
+            catch (e) {
+            }
+        }
+        function fnChartCall(period) {
+            fnLoadChart(IndexId + "_" + period);
+        }
+
+        function openFile(tag) {
+            window.open('../Common/AjaxFunctions.aspx?qstrtype=GetDMSLinks&qstrTag=' + tag, "_blank");
+            
+        }
+        function fnChartHideShow(Visiblility) {
+            if (Visiblility == "show" && TopTab == "IndexChart") {
+                //$(".dvChart").show();
+                $(".dvChart").css({ left: 45, position: 'absolute' });
+            }
+            else {
+                //$(".dvChart").hide();
+                $(".dvChart").css({ left: -1500, position: 'absolute' });
+            }
+        }
+    </script>
+
+    <script src="https://www.rbpinsights.com/Javascripts/jsPopWindow.js" type="text/javascript"></script>
+
+    <link media="print, projection, screen" href="https://www.rbpinsights.com/Tab/ui.tabs.css"
+        type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.rbpinsights.com/Tab/ui.core.js"></script>
+
+    <script type="text/javascript" src="https://www.rbpinsights.com/Tab/ui.tabs.js"></script>
+
+    <script language="javascript" type="text/javascript">        AC_FL_RunContent = 0;</script>
+
+    <script src="https://www.rbpinsights.com/AdobeAir/AC_RunActiveContent.js" type="text/javascript"
+        language="javascript"></script>
+
+    <script src="https://www.rbpinsights.com/indexes/swfobject/swfobject.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .rightside {
+            display: none;
+        }
+
+        #dvLoad {
+            background-image: URL(../Images/spacer.gif);
+            line-height: 50px;
+            text-align: center;
+            width: 100%;
+            height: 1700px;
+            z-index: 1000;
+            left: 0px;
+            top: 0px;
+            position: absolute;
+        }
+        /* removed pdf column */ #dvGridpdf .colBro {
+            display: none;
+        }
+
+        .dvRow .colBro {
+            display: none;
+        }
+
+        #dvGridpdf .colFileName {
+            width: 700px;
+        }
+
+        #dvGrid .dvRow .colName {
+            font-size: 11px;
+            color: #333;
+            height: 22px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            -moz-binding: url('../Stylesheets/ellipsis-xbl.xml#ellipsis');
+            border: 0px solid red;
+        }
+
+        .ellip sup {
+            position: static;
+        }
+
+        .ellip {
+            text-overflow: ellipsis;
+            -moz-binding: url('../Stylesheets/ellipsis-xbl.xml#ellipsis' );
+        }
+
+        .dvChart {
+            height: 100%;
+            position: absolute;
+            text-align: center;
+            z-index: 1000;
+            left: 45px;
+            top: 70px;
+            border: 0px solid red;
+            display: none;
+            height: 560px;
+            width: 870px;
+            border: 0px solid red;
+            background-color: #323232;
+            background-image: URL(../Images/spacer.gif);
+        }
+
+        .btnChart {
+            float: right;
+            width: 32px;
+            height: 23px;
+            cursor: pointer;
+            background-image: URL(Images/btnChart.png);
+            background-repeat: no-repeat;
+        }
+
+        .ChartText {
+            color: #000000;
+            margin-top: 4px;
+            font-size: 11px;
+        }
+
+        .btnChartOn {
+            float: right;
+            width: 32px;
+            height: 23px;
+            overflow: auto;
+            cursor: pointer;
+            background-image: URL(Images/btnChartOn.png);
+            background-repeat: no-repeat;
+        }
+
+        .ChartTextOn {
+            color: #ffffff;
+            margin-top: 4px;
+            font-size: 11px;
+        }
+
+        .btnChartFirstOn {
+            float: right;
+            width: 32px;
+            height: 23px;
+            overflow: auto;
+            cursor: pointer;
+            background-image: URL(Images/btnChartFirstOn.png);
+        }
+
+        .btnChartLastOn {
+            float: right;
+            width: 32px;
+            height: 23px;
+            overflow: auto;
+            cursor: pointer;
+            background-image: URL(Images/btnChartLastOn.png);
+        }
+
+        .btnChartFirst {
+            float: right;
+            width: 32px;
+            height: 23px;
+            cursor: pointer;
+            background-image: URL(Images/btnChartFirst.png);
+            background-repeat: no-repeat;
+        }
+
+        .btnChartLast {
+            float: right;
+            width: 32px;
+            height: 23px;
+            cursor: pointer;
+            background-image: URL(Images/btnChartLast.png);
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="./index-performance.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU3NDcwMTkxMmRkvmPoAOySjmuiX9+uDbcqBu0avk8=" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="02B72B5C" />
+</div>
+    
+    <div id="dvLoad" style="display: none;">
+    </div>
+
+    <div id="wrap">
+        <div id="header">
+            
+<style media="print" type="text/css">
+    .TopMenu
+    {
+        display: none;
+    }
+    .hTopbar
+    {
+        display: none;
+    }
+  
+</style>
+ 
+
+<div class="logoheight">
+    <div class="imgLogo" style="">
+        <a href="https://www.rbpinsights.com/">
+            <img src="https://www.rbpinsights.com/Images/guggenheim_logo_alt.png" alt="Guggenheim Partners Investment Management"
+                width="" height="" />
+        </a>
+    </div>
+    <div class="TopMenu">
+       
+        <ul class="topnav">
+            <li id="linews">
+                <div class="strip" style="width: 85px;">
+                </div>
+                <a href="#" tabindex="106">Contact Us</a>
+                <ul class="subnav" style="width: 83px;">
+                    <li><a href="https://www.rbpinsights.com/contact-us/contact-us.aspx">Contact Us</a></li></ul>
+            </li>
+        </ul>
+        <ul class="topnav">
+            <li id="lirbp-university">
+                <div class="strip" style="width: 80px;">
+                </div>
+                <a href="#" tabindex="104">Education</a>
+                <ul class="subnav">
+                    <li><a href="https://www.rbpinsights.com/rbp-university/document-library.aspx">Education</a></li>
+                      <li class="sub"><a href="https://www.rbpinsights.com/rbp-university/document-library.aspx">Document Library</a></li>
+                    <li class="sub"><a href="https://www.rbpinsights.com/faq/frequently-asked-questions.aspx">
+                        FAQ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="topnav">
+            <li id="liindexes">
+                <div class="strip" style="width: 80px;">
+                </div>
+                <a href="#" tabindex="103">Indexes</a>
+                <ul class="subnav">
+                    <li><a href="https://www.rbpinsights.com/indexes/overview.aspx">Indexes</a></li>
+                    <li class="sub"><a href="https://www.rbpinsights.com/indexes/overview.aspx">Overview</a></li>
+                    <li class="sub"><a href="https://www.rbpinsights.com/indexes/index-performance.aspx">Indexes</a></li>
+                    
+                </ul>
+            </li>
+        </ul>
+        <ul class="topnav">
+            <li id="liprocess-philosophy">
+                <div class="strip" style="width: 150px;">
+                </div>
+                <a href="#" tabindex="102">Process &amp; Philosophy</a><ul class="subnav">
+                    <li><a href="https://www.rbpinsights.com/process-philosophy/what-is-rbp.aspx">Process &amp;
+                        Philosophy</a></li>
+                    <li class="sub"><a class="sup" href="https://www.rbpinsights.com/process-philosophy/what-is-rbp.aspx">
+                        What is RBP<sup>&reg;</sup>?</a></li>
+                    <li class="sub"><a class="sup" href="https://www.rbpinsights.com/process-philosophy/how-is-rbp-used.aspx">
+                        How We Calculate RBP<sup>&reg;</sup>?</a></li>
+                    <li class="sub"><a class="sup" href="https://www.rbpinsights.com/process-philosophy/rbp-probabilities.aspx">
+                        RBP<sup>&reg;</sup> Probability?</a></li>
+                  
+                    
+                </ul>
+            </li>
+        </ul>
+        <ul class="topnav ">
+            <li id="liHome">
+                <div class="strip" style="width: 70px;">
+                </div>
+                <a href="#" tabindex="99">Home</a><ul class="subnav" style="width: 68px;">
+                    <li><a href="https://www.rbpinsights.com/">Home</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="hTopbar">
+    <div class="InvText">
+    </div>
+     
+</div>
+
+<script language="javascript" type="text/javascript">
+    String.prototype.endsWith = function(str)
+    { return (this.match(str + "$") == str) }
+    $(document).ready(function() {
+        $("ul.topnav li").mouseover(function() { $(this).find("ul.subnav").fadeIn('fast'); $(this).hover(function() { }, function() { $(this).find("ul.subnav").fadeOut('fast'); }); }).hover(function() { }, function() { });
+        var siteURL = location.href.toLowerCase();
+        if (siteURL.endsWith('https://www.rbpinsights.com/') == true) { $("#liHome").addClass("sselect") };
+        if (siteURL.endsWith('https://www.rbpinsights.com/index.aspx') == true) { $("#liHome").addClass("sselect") };
+        if (siteURL.match("/about-us/") != null) { $("#liabout-us").addClass("sselect") };
+        if (siteURL.match("/process-philosophy/") != null) { $("#liprocess-philosophy").addClass("sselect") };
+        if (siteURL.match("/indexes/") != null) { $("#liindexes").addClass("sselect") };
+        if (siteURL.match("/rbp-university/") != null) { $("#lirbp-university").addClass("sselect") };
+        if (siteURL.match("/faq/") != null) { $("#lirbp-university").addClass("sselect") };
+        if (siteURL.match("/news/") != null) { $("#linews").addClass("sselect") };
+    }); 
+     
+</script>
+
+
+            
+
+        </div>
+        <div style="height: 70px; border: 0px solid red;">
+            <div class="SideTitle" style="border:0px solid red;z-index:10000;">
+                <a>
+                    
+    Indexes 
+
+                </a>
+            </div>
+           
+        </div>
+        <div style="height: 30px; border: 0px solid red;">
+        </div>
+        <div style="min-height: 350px;">
+            
+
+            <div id="sidebar">
+                <div class="sideMenu">
+                    
+
+                </div>
+                
+                
+            </div>
+            <div id="contmain">
+                <div class="rightside" style="border: 0px solid red;">
+                    
+<div id="rightside">
+    <style media="print" type="text/css">
+        .rightmenu {
+            display: none;
+        }
+
+        #RolloverGlossary {
+            display: none;
+        }
+    </style>
+    <div class="rightmenu" style="margin-bottom: 90px;">
+        <div class="padd">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.rbpinsights.com/Accordion/ddaccordion.js"></script>
+
+    <div id="RolloverGlossary" class="RolloverGlossary01" style="padding-left: 10px; padding-top: 20px;">
+
+        <script type="text/javascript">
+            ddaccordion.init({ headerclass: "silverheader", contentclass: "submenu", revealtype: "click", mouseoverdelay: 200, collapseprev: true, defaultexpanded: [], onemustopen: false, animatedefault: true, persiststate: false, toggleclass: ["", "selected"], togglehtml: ["", "", ""], animatespeed: "normal", oninit: function (headers, expandedindices) { }, onopenclose: function (header, index, state, isuseractivated) { } })
+        </script>
+
+        <div>
+            <img src="https://www.rbpinsights.com/Accordion/RolloverTitle.png" alt="Glossary" width="221"
+                height="34" />
+        </div>
+        <div class="applemenu">
+            <div class="silverheader">
+                <a>RBP<sup>®</sup><span class="arr1"></span></a>
+            </div>
+            <div class="submenu">
+                The revenue growth necessary to support the current stock price. Required Business
+            Performance<span class="spsup"><sup>®</sup></span> is  calculated
+            using a reverse discounted cash flow valuation model that uses the current stock
+            price as the primary input.
+            </div>
+            <div class="silverheader">
+                <div class="arrow">
+                    <a>RBP<sup>®</sup> Probability<span class="arr1"></span></a>
+                </div>
+            </div>
+            <div class="submenu">
+                The likelihood that management will deliver the Required Business Performance<span
+                    class="spsup"><sup>®</sup></span> to support the stock price. It is calculated
+            by fitting the company’s historical revenue growth to a distribution, then finding
+            the company’s Required Business Performance within this historical distribution.
+            
+            </div>
+            
+            <div class="silverheader">
+                <a>RBP<sup>®</sup> Methodology<span class="arr1"></span></a>
+            </div>
+            <div class="submenu">
+                Uses a reverse discounted cash flow
+            valuation model to determine what the stock’s current price implies in terms of
+            future free cash flow and revenue (Required Business Performance<span class="spsup"><sup>®</sup></span>
+                ) as well as the calculation of the likelihood that management can deliver the Required
+            Business Performance<span class="spsup"><sup>®</sup></span>, known as RBP<span class="spsup"><sup>®</sup></span>
+                Probability.
+            </div>
+           
+        </div>
+        <div>
+            <img src="https://www.rbpinsights.com/Accordion/RolloverBtm.png" alt="" height="11" width="221" />
+        </div>
+    </div>
+</div>
+
+                    <span class="rightside02">
+                        
+
+                    </span><span class="rightside01">
+                        
+
+                    </span><span class="rightside03">
+                        
+
+                    </span>
+                </div>
+                <div class="content">
+                    <div>
+                        
+    <a name="IndexConstruction"></a>
+    <div style="position: relative; border: 0px solid red; margin-left: -240px;">
+        <iframe class="dvChart" style="display: none;"></iframe>
+        <div id="dvChart" class="dvChart" style="border: 0px solid red;">
+
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td align="right">
+                        <div id="dvNote" style="font-size: 11px; text-align: left; padding-top: 10px; padding-right: 20px; height: 60px; color: #cccccc; border: 0px solid red; float: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <iframe id="ifChart" name="ifChart" frameborder="0" scrolling="no" style="margin: 0px; border: 0px; height: 450px; background-color: #323232; border: 0px solid red; width: 850px;"></iframe>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div id="dvBtns" style="padding-right: 50px; background-color: #323232;">
+                            
+                            <div id="btnChart_MAX" class="btnChartLast" onclick="fnChartCall('MAX')">
+                                <div class="ChartText">
+                                    MAX
+                                </div>
+                            </div>
+                            <div id="btnChart_10Y" class="btnChart" onclick="fnChartCall('10Y')">
+                                <div class="ChartText">
+                                    10Y
+                                </div>
+                            </div>
+                            <div id="btnChart_5Y" class="btnChart" onclick="fnChartCall('5Y')">
+                                <div class="ChartText">
+                                    5Y
+                                </div>
+                            </div>
+                            <div id="btnChart_3Y" class="btnChart" onclick="fnChartCall('3Y')">
+                                <div class="ChartText">
+                                    3Y
+                                </div>
+                            </div>
+                            <div id="btnChart_1Y" class="btnChart" onclick="fnChartCall('1Y')">
+                                <div class="ChartText">
+                                    1Y
+                                </div>
+                            </div>
+                            <div id="btnChart_YTD" class="btnChart" onclick="fnChartCall('YTD')">
+                                <div class="ChartText">
+                                    YTD
+                                </div>
+                            </div>
+                            <div id="btnChart_6M" class="btnChart" onclick="fnChartCall('6M')">
+                                <div class="ChartText">
+                                    6M
+                                </div>
+                            </div>
+                            <div id="btnChart_3M" class="btnChart" onclick="fnChartCall('3M')">
+                                <div class="ChartText">
+                                    3M
+                                </div>
+                            </div>
+                            <div id="btnChart_1M" class="btnChart" onclick="fnChartCall('1M')">
+                                <div class="ChartText">
+                                    1M
+                                </div>
+                            </div>
+                            <div id="btnChart_5D" class="btnChartFirst" onclick="fnChartCall('5D')">
+                                <div class="ChartText">
+                                    5D
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div style="width: 950px;">
+            <div>
+                <div id="IndexSWF">
+                    <h1 style="font-family:Arial;">Index Performance Tool</h1>
+			        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+
+                </div>
+
+                <script language="javascript" type="text/javascript">
+                    var url = window.location.href;
+                    var LoadPart;
+                    if (url.indexOf("#") == -1) {
+                        LoadPart = "IndexData" + "_" + "DirAllocationIndexes" + "__50";
+                    }
+                    else {
+                        LoadPart = url.substring(url.indexOf("#") + 1);
+                    }
+                    var flashvars = {
+                        url: "https://www.rbpinsights.com/Widgets/DJRBPIndexes/allindexes_dj.xml",  
+                        //url: "http://www.rbpinstitute.com/widgets/djrbpindexes/allindexes_dj_demo.xml",
+                        BackEndURL: "https://www.rbpinsights.com/", 
+                        IndexInfoUrl: "https://www.rbpinsights.com/PDFs/TVLinks.xml",
+                        SwfPath: "https://www.rbpinsights.com/Widgets/RBPinAction/",
+                        SwfDirectional: "directional21.swf",
+                        SwfSMIDDirectional: "sm_directional05.swf",
+                        SwfStrategy: "Strategy_construction43.swf",
+                        SwfSMIDStrategy: "SMIDStrategy_construction13.swf",
+                        SwfStyle: "Style26.swf",
+                        SwfDividend: "dividend20.swf",
+                        SwfSmallCap: "small-cap_index14.swf",
+                        SwfTotal: "total_stock_market_index13.swf",
+                        Swfislamic: "islamic_market_index16.swf",
+                        SwfLeading: "Leading-lagging13.swf",
+                        SwfBlended: "Blended09.swf",
+                        Tab: LoadPart
+                    };  
+                    var params = { menu: "false", bgcolor: "#121212", allowFullScreen: "true", allowscriptaccess: "always" };
+                    var attributes = { id: "IndexesSWF1" };
+
+                    swfobject.embedSWF("https://www.rbpinsights.com/Widgets/RBPinAction/Indexes068_DMS.swf", "IndexSWF", "950", "715", "9.0.0", false, flashvars, params, attributes);    
+           
+                </script>
+
+                
+                <div style="margin-top: -10px; font-size: 11px;">
+                    <p>
+                        <br />
+                        <br />
+                        <b>Past performance is not indicative of future results. See the disclaimer at the end
+                        of this document for the launch dates of the individual indexes. Index data is provided
+                        for informational purposes only. An index is unmanaged, not subject to fees and
+                        not available for direct investment. Guggenheim Indexes are not meant to be used as suggestions regarding the advisability of investing in any securities of any company, investment fund or other investment vehicle. A decision to invest should not be made in reliance on any of the statements set forth on this website.</b>
+                    </p>
+                </div>
+               
+                <div style="float: left; ">
+                    
+                    <p>
+                        
+                        Guggenheim RBP Large-Cap Leading 30 Index launch date: 03/11/2008<br />
+                        Guggenheim RBP Large-Cap Directional Series Indexes launch date: 05/18/2009<br />
+                        Guggenheim RBP Islamic Market U.S. 50 Index launch date: 01/08/2010<br />
+                        Guggenheim RBP Large-Cap Value Index launch date: 01/13/2011<br />
+                        Guggenheim RBP Dividend Index launch date: 01/21/2011<br />                       
+                        Guggenheim RBP Small-Cap Index launch date: 11/07/2011<br />                       
+                        Guggenheim Directional Allocation Indexes launch date: 06/11/2012<br />
+                        Guggenheim RBP Blended Index launch date: 03/20/2013<br />
+                        Guggenheim SMID-Cap Directional Allocation Series Index launch date: 04/09/2014<br />
+                        Guggenheim SMID-Cap Directional Allocation Total Return Index launch date: 04/28/2014<br />
+                    </p>
+                    <span style="page-break-before: always;">
+                        <br />
+                    </span>
+                    <p>
+                        &copy; Guggenheim Partners Investment Management, LLC
+                    2020. All rights reserved.
+                    </p>
+                    <p>
+                        "Guggenheim SMID-Cap Directional Allocation Total Return Index", "Guggenheim SMID-Cap Directional Allocation Series Index", "Guggenheim RBP Blended Index", "Guggenheim Directional Allocation Total Return Index", "Guggenheim RBP Large-Cap Leading 30 Index", 
+                    "Guggenheim RBP Large-Cap Market Index", "Guggenheim RBP Large-Cap Market Total Return Index", "Guggenheim RBP Islamic Market U.S. 50 Index", "Guggenheim RBP Islamic Market U.S. 50 Total Return Index",
+                    "Guggenheim RBP Large-Cap Value Index", "Guggenheim RBP Large-Cap Value Total Return Index", 
+                    "Guggenheim RBP Large-Cap Aggressive Index", "Guggenheim RBP Large-Cap Aggressive Total Return Index", "Guggenheim RBP Large-Cap Defensive Index", "Guggenheim RBP Large-Cap Defensive Total Return Index", 
+                    "Guggenheim RBP Dividend Index", "Guggenheim RBP Dividend Total Return Index", 
+                    "Guggenheim RBP Small-Cap Index", "Guggenheim RBP Small-Cap Total Return Index" (the "Indexes") are the property of Guggenheim Partners Investment Management, LLC, which has contracted with S&P Dow Jones Indices LLC or its affiliate
+                    ("S&PDJI") to maintain and calculate the Indexes. The "Dow Jones U.S. Large-Cap
+                    Total Stock Market Index", "Dow Jones U.S. Large-Cap Growth Total Stock Market Index",
+                    "Dow Jones U.S. Large-Cap Value Total Stock Market Index", "Dow Jones U.S. Mid-Cap
+                    Total Stock Market Index", "Dow Jones U.S. Small-Cap Total Stock Market Index", "S&P
+                    500 Index", "S&P 2-Year U.S Treasury Note Futures Total Return Index (Bond)" are
+                    the property of S&PDJI and/or their third party licensors and has been licensed
+                    by S&PDJI for use by Guggenheim Partners Investment Management, LLC in connection with the Indexes. S&PDJI
+                    shall have no liability for any errors or omissions in calculating the Indexes.
+                    </p>
+                    <p>
+                    "RBP<span class="spsup"><sup>&reg;</sup></span>" and "Required Business Performance<span class="spsup"><sup>&reg;</sup></span>" are registered
+                    trademarks of Guggenheim Partners Investment Management, LLC or one of its subsidiaries. Guggenheim Partners Investment Management, LLC is a subsidiary of Guggenheim Partners, LLC.
+                    </p>
+                    <p class="contactusPara">
+                        Contact us, if you are interested in learning more about Guggenheim Indexes.
+                    <a href="https://www.rbpinsights.com/contact-us/contact-us.aspx?Learn=4">Click here >></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    </div>
+                    <h1 class="title">
+                        
+
+                    </h1>
+                    <div>
+                        
+
+                    </div>
+                    <div>
+                        <div class="text">
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="BeforeFooter">
+            
+
+        </div>
+        <div id="footer">
+            
+<div class="HR">
+</div>
+<div class="link" style="clear: both;">
+    <div style="float: left;padding-bottom:5px; ">
+        <a href="https://www.rbpinsights.com/about-us/about-us.aspx">ABOUT US</a><a> | </a><a
+            href="https://www.rbpinsights.com/sitemap.aspx">SITE MAP</a><a> | </a><a href="https://www.rbpinsights.com/contact-us/contact-us.aspx">
+                CONTACT US</a><a> | </a><a href="https://www.rbpinsights.com/legal-notices/disclaimer.aspx"
+                    rel="nofollow">LEGAL NOTICES</a></div>
+</div>
+<div class="bar" style="clear: both">
+</div>
+<div class="notice">
+    Guggenheim Partners Investment Management, LLC. 330 Madison Avenue, 10th Floor, New York, NY 10017
+    <div style="height: 6px;">
+    </div>
+    Copyright ©
+    2020
+    Guggenheim Partners Investment Management, LLC. All rights reserved.<br />
+</div>
+<div class="Guggen">
+    
+</div>
+
+            
+
+<div id="divLeftMenu" style="display: none;">
+    <a href="https://www.rbpinsights.com/rbp-process/overview.aspx">Process &amp; Philosophy</a>
+    <a href="https://www.rbpinsights.com/investment-products/mutual-funds.aspx">Mutual Funds</a>
+    
+    <a href="https://www.rbpinsights.com/tools-and-resources/advisor-tools.aspx">Tools &amp;
+        Resources</a> <a href="https://www.rbpinsights.com/indexes/dow-jones-rbp-indexes.aspx">Indexes</a>
+    
+    <a href="https://www.rbpinsights.com/invest/invest.aspx">Invest</a>
+    
+</div>
+
+        </div>
+        <div id="disclaimer">
+            <div class="disclaimerbox" style="display: none">
+                
+<div class="disclimer">
+    The Funds are new and have limited operating history. An investment in the Funds
+    involves risks, including loss of principal. No assurance can be given that the
+    investment objectives described herein will be achieved.
+    <br />
+    <br />
+    ADI is not affiliated with Guggenheim Investment Management, LLC, Transparent Value
+    Advisors, LLC (“TVA”) and/or Guggenheim Partners, LLC. TVA and ADI are not affiliated
+    with S&P Dow Jones Indices. Transparent Value Funds are distributed by ALPS Distributors,
+    Inc (“ADI”).
+    <br />
+    <br />
+</div>
+
+                
+
+                <div class="disclimer hide">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    </form>
+    
+<!-- Tracking START -->
+
+<!-- Tracking END -->
+
+</body>
+</html>
