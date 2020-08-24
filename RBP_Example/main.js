@@ -753,7 +753,7 @@ var RbpInsightsService = /** @class */ (function () {
         this.http = http;
     }
     RbpInsightsService.prototype.getRebalanceDates = function () {
-        return this.http.get('./assets/Rebalance_Dates.xml', { responseType: 'text' });
+        return this.http.get('/kunati/RBP_Example/assets/Rebalance_Dates.xml', { responseType: 'text' });
     };
     RbpInsightsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
